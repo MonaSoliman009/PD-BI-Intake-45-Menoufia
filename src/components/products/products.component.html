@@ -1,0 +1,83 @@
+<h3>Total order Price is : {{totalOrderPrice}}</h3>
+
+<div class="m-5">
+  <label for="" class="form-label">Category</label>
+  <!-- <select class="form-select form-select-lg" name="" id="" #sel (change)="slectCat(sel.value)"> -->
+    <select class="form-select form-select-lg" name="" id="" [(ngModel)]="selectedCatId">
+
+    <option *ngFor="let cat of categories" [value]="cat.id" >{{cat.name}}</option>
+
+  </select>
+
+  <h3>selcted cat id {{selectedCatId}}</h3>
+</div>
+
+
+<div class="row row-cols-1 row-cols-md-4 g-4 m-5">
+  <!-- <div class="col" *ngFor="let prd of products;let i=index;trackBy:trackByFun"  [class.d-none]="selectedCatId!=prd.catId && selectedCatId!=0"> -->
+    <ng-container  *ngFor="let prd of products;let i=index;trackBy:trackByFun" >
+    <div class="col" *ngIf="selectedCatId==prd.catId">
+
+      <!-- [ngStyle]="{'font-size':(prd.quantity==0)?'20px':'30px'}" -->
+      <!-- [ngClass]="(prd.quantity==0)?'text-danger':'text-success'" -->
+      <!-- [style.background-color]="(prd.quantity==0)?'yellow':'grey'"  -->
+      <div class="card" appHighlight="#09c" highlightedColor="green">
+        <!-- <img src="{{prd.imgUrl}}" class="card-img-top" alt="..."> -->
+
+        <!-- property binding -->
+        <img [src]="prd.imgUrl" class="card-img-top" alt="..." [style]="x">
+
+        <div class="card-body">
+          <h5 class="card-title">{{prd.name}} </h5>
+          <p class="card-text">Price is : {{prd.price}}</p>
+
+          <!-- <p class="card-text" *ngIf="prd.quantity!=0;else outOfStock">Quantity is : {{prd.quantity}}</p>
+           <ng-template #outOfStock><p class="card-text">Quantity is : Out Of Stock</p></ng-template> -->
+
+           <ng-container [ngSwitch]="prd.quantity">
+            <p class="card-text" *ngSwitchCase="0">Quantity is : Out of stock</p>
+            <p class="card-text" *ngSwitchCase="1">Quantity is : last item</p>
+            <p class="card-text" *ngSwitchCase="2">Quantity is : last two items</p>
+            <p class="card-text" *ngSwitchDefault >Quantity is : {{prd.quantity}}</p>
+           </ng-container>
+
+           <!-- template variable  , refrence -->
+          <input type="number" #itemCount [disabled]="prd.quantity==0" />
+          <button class="btn btn-success" (click)="buy(prd.price,itemCount.value)">Buy</button>
+
+        </div>
+      </div>
+    </div>
+
+  </ng-container>
+
+  <!-- @for(prd of products;track prd.id){
+    <div class="col" *ngIf="selectedCatId==prd.catId">
+
+
+      <div class="card" appHighlight="#09c" highlightedColor="green">
+
+        <img [src]="prd.imgUrl" class="card-img-top" alt="..." [style]="x">
+
+        <div class="card-body">
+          <h5 class="card-title">{{prd.name}} </h5>
+          <p class="card-text">Price is : {{prd.price}}</p>
+
+           <ng-template #outOfStock><p class="card-text">Quantity is : Out Of Stock</p></ng-template>
+
+           <ng-container [ngSwitch]="prd.quantity">
+            <p class="card-text" *ngSwitchCase="0">Quantity is : Out of stock</p>
+            <p class="card-text" *ngSwitchCase="1">Quantity is : last item</p>
+            <p class="card-text" *ngSwitchCase="2">Quantity is : last two items</p>
+            <p class="card-text" *ngSwitchDefault >Quantity is : {{prd.quantity}}</p>
+           </ng-container>
+
+          <input type="number" #itemCount [disabled]="prd.quantity==0" />
+          <button class="btn btn-success" (click)="buy(prd.price,itemCount.value)">Buy</button>
+
+        </div>
+      </div>
+    </div>
+  }@empty {} -->
+
+</div>
