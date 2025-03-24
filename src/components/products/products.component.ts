@@ -4,10 +4,11 @@ import { CommonModule } from '@angular/common';
 import { Icategory } from '../../models/icategory';
 import { FormsModule } from '@angular/forms';
 import { HighlightDirective } from '../../directives/highlight.directive';
+import { CurrencyTransformPipe } from '../../pipes/currency-transform.pipe';
 
 @Component({
   selector: 'app-products',
-  imports: [CommonModule,FormsModule,HighlightDirective],
+  imports: [CommonModule,FormsModule,HighlightDirective,CurrencyTransformPipe],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',
 })
@@ -17,6 +18,7 @@ export class ProductsComponent {
   totalOrderPrice: number = 0;
   selectedCatId: number = 0;
   x:string='width:100%'
+  date:Date=new Date();
   constructor() {
     this.products = [
       {
