@@ -5,6 +5,8 @@ import { Icategory } from '../../models/icategory';
 import { FormsModule } from '@angular/forms';
 import { HighlightDirective } from '../../directives/highlight.directive';
 import { CurrencyTransformPipe } from '../../pipes/currency-transform.pipe';
+import { ProductsService } from '../../services/products.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -19,57 +21,8 @@ export class ProductsComponent {
   selectedCatId: number = 0;
   x:string='width:100%'
   date:Date=new Date();
-  constructor() {
-    this.products = [
-      {
-        id: 100,
-        name: 'Dell laptop',
-        price: 15000,
-        quantity: 5,
-        imgUrl: 'https://fakeimg.pl/250x100/',
-        catId: 1,
-      },
-      {
-        id: 200,
-        name: 'ipdad',
-        price: 30000,
-        quantity: 0,
-        imgUrl: 'https://fakeimg.pl/250x100/',
-        catId: 2,
-      },
-      {
-        id: 300,
-        name: 'lenovo laptop',
-        price: 8210,
-        quantity: 1,
-        imgUrl: 'https://fakeimg.pl/250x100/',
-        catId: 1,
-      },
-      {
-        id: 400,
-        name: 'Huawei tablet',
-        price: 25000,
-        quantity: 2,
-        imgUrl: 'https://fakeimg.pl/250x100/',
-        catId: 3,
-      },
-      {
-        id: 500,
-        name: 'Ipad 2',
-        price: 8000,
-        quantity: 3,
-        imgUrl: 'https://fakeimg.pl/250x100/',
-        catId: 2,
-      },
-      {
-        id: 600,
-        name: 'Samsung tablet',
-        price: 6000,
-        quantity: 0,
-        imgUrl: 'https://fakeimg.pl/250x100/',
-        catId: 3,
-      },
-    ];
+  constructor(private productsService:ProductsService , private router:Router) {
+    this.products =this.productsService.products;
 
     this.categories=[
       {id:1,name:'Laptop'},
@@ -93,5 +46,19 @@ export class ProductsComponent {
   trackByFun(index:number,prd:IProduct):number{
 
     return prd.id;
+  }
+
+  filterProducts(){
+    if(this.selectedCatId==0){
+      this.products=this.productsService.products
+    }else{
+      this.products=this.productsService.getProductsByCatId(this.selectedCatId)
+
+    }
+  }
+
+  navigateToDetails(id:number){
+  //  this.router.navigate(['/details',id])
+  this.router.navigateByUrl(`/details/${id}`)
   }
 }
