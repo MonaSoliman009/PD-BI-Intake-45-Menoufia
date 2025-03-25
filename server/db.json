@@ -1,0 +1,74 @@
+{
+  "products": [
+    {
+      "id": "200",
+      "name": "ipdad",
+      "price": 30000,
+      "quantity": 0,
+      "imgUrl": "https://fakeimg.pl/250x100/",
+      "catId": 2
+    },
+    {
+      "id": "300",
+      "name": "lenovo laptop",
+      "price": 8210,
+      "quantity": 1,
+      "imgUrl": "https://fakeimg.pl/250x100/",
+      "catId": 1
+    },
+    {
+      "id": "400",
+      "name": "Huawei tablet",
+      "price": 25000,
+      "quantity": 2,
+      "imgUrl": "https://fakeimg.pl/250x100/",
+      "catId": 3
+    },
+    {
+      "id": "500",
+      "name": "Ipad 2",
+      "price": 8000,
+      "quantity": 3,
+      "imgUrl": "https://fakeimg.pl/250x100/",
+      "catId": 2
+    },
+    {
+      "id": "600",
+      "name": "Samsung tablet",
+      "price": 6000,
+      "quantity": 0,
+      "imgUrl": "https://fakeimg.pl/250x100/",
+      "catId": 3
+    },
+    {
+      "id": "032f",
+      "name": "Updated Name",
+      "price": 15000,
+      "quantity": 5,
+      "imgUrl": "https://fakeimg.pl/250x100/",
+      "catId": 1
+    },
+    {
+      "id": "ea35",
+      "name": "new Product",
+      "price": 5000,
+      "quantity": 3,
+      "imgUrl": "C:\\fakepath\\1.avif",
+      "catId": "2"
+    }
+  ],
+  "categories": [
+    {
+      "id": "1",
+      "name": "Laptop"
+    },
+    {
+      "id": "2",
+      "name": "Ipad"
+    },
+    {
+      "id": "3",
+      "name": "Tablet"
+    }
+  ]
+}

@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from '../../services/products.service';
 import { IProduct } from '../../models/iproduct';
+import { ProductsApiService } from '../../services/products-api.service';
 
 @Component({
   selector: 'app-details',
@@ -12,12 +13,15 @@ import { IProduct } from '../../models/iproduct';
 export class DetailsComponent implements OnInit {
   @Input() id: string = '';
   product: IProduct | null = null;
-  // constructor(private  activatedRoute:ActivatedRoute){}
-  constructor(private productsService: ProductsService) {}
+  constructor(private productsApiService:ProductsApiService) {}
   ngOnInit(): void {
-    console.log(this.id);
-    this.product = this.productsService.getProductById(+this.id);
-
-    //  console.log(this.activatedRoute.snapshot.params['id']);
+    this.productsApiService.getProductById(this.id).subscribe({
+      next:(res)=>{
+        this.product=res
+      },
+      error:(err)=>console.error(err)
+    })
   }
+
+
 }
